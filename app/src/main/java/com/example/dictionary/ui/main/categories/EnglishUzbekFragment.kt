@@ -1,26 +1,22 @@
 package com.example.dictionary.ui.main.categories
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.example.dictionary.BaseFragment
 
 import com.example.dictionary.R
 import com.example.dictionary.adapter.EngUzbAdapter
+import com.example.dictionary.db.model.Translation
 import com.example.dictionary.db.model.Words
 import com.example.dictionary.ui.main.fragmentdiolog.MyAlertDialogFragment
 import com.example.dictionary.ui.main.viewmodel.EngUzbViewModel
 import kotlinx.android.synthetic.main.fragment_english_uzbek.*
-import kotlinx.android.synthetic.main.material_dialog.*
 
 /**
  * A simple [Fragment] subclass.
@@ -76,7 +72,9 @@ EngUzbAdapter.Interaction{
     }
 
     private fun showRVItemDialog(pastion: Int,item: Words){
-        val dialog = MyAlertDialogFragment.newInstance("ssadasdasdasd",item)
+
+
+        val dialog = MyAlertDialogFragment.newInstance(createTranslations(pastion))
         dialog.setTargetFragment(this, 0)
         val fragmentManager = fragmentManager ?: return
         dialog.show(fragmentManager, MyAlertDialogFragment::class.java.simpleName)
@@ -118,11 +116,30 @@ EngUzbAdapter.Interaction{
         wordsList.add(Words("dad"))
         wordsList.add(Words("daddy"))
 
-        val translateList = ArrayList<Words>()
-        translateList.add(Words("hayratda qoldirmoq"));
-
 
         return wordsList
+    }
+    private fun createTranslations(position: Int): Translation {
+
+        val translateList = ArrayList<Translation>()
+        translateList.add(Translation("aback","[]","adverb","hayratda qoldirmoq"));
+        translateList.add(Translation("abacus","[]","noun","cho't"));
+        translateList.add(Translation("abandon","[]","verb","1) tashlab ketmoq,tark etmoq\n2)to'xtatmoq, oxirga yetkazmaslik\n-abandonment n tashlab ketish ,tarke tish:\n to'xtashish,oxirga yetkazmaslik"));
+        translateList.add(Translation("babe","[]","","1)(old-fashioned)chaqaloq\n2)(US slang)(kishilarga,asosan\nayollarga,qizlarga nisbatan)qizaloq"));
+        translateList.add(Translation("baboon","[]","noun","paviak,ittumshuq maymun"));
+        translateList.add(Translation("baby","[]","noun","(pl babies) 1)chaqaloq\n2) = BABE - babyish adj bolalarcha,\nbachkana - baby carriage n(US) = \nPRAM - babysit v bolaga qaramoq -\nbabysitter n enaga"));
+        translateList.add(Translation("bacchanalian","[]","adjectative","(formal)vakxanaliya...,uzluksiz\n ayshi-ishrat..."));
+        translateList.add(Translation("baccy","[]","noun","tamaki"));
+        translateList.add(Translation("bachelor","[]","noun","bo'ydoq (Ayollarga nisbatan spinster \n qo'llaniladi. \n 2) bakalavr"));
+        translateList.add(Translation("cabaret","[]","noun","kabare"));
+        translateList.add(Translation("cabbage","[]","noun","karam"));
+        translateList.add(Translation("cabbie","[]","","(also cabby)izvosh (fayton)\n izvoshchi,kucher"));
+        translateList.add(Translation("dabble","[]","verb","1)suvni chayqaltirmoq,shappillatmoq,\n sachratmoq;\n 2)shunchaki yuzaki qiziqmoq,yuzaki\n shug'ullantirmoq"));
+        translateList.add(Translation("dacha","[]","noun","dacha(shahar tashqarisidagi hovli - joy)"));
+        translateList.add(Translation("dad","[]","noun","(informal)dada,ota"));
+        translateList.add(Translation("daddy","[]","noun","(pl daddies) (bolalar tomonidan \n qo'llaniladi)dada ,ota,otajon"));
+
+        return translateList.get(position);
     }
 
 }
